@@ -32,7 +32,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="YDt-uy-6iD" customClass="DiscoveryCell" customModule="EZRecipes" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="DiscoveryCell" id="YDt-uy-6iD" customClass="DiscoveryCell" customModule="EZRecipes" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="199" height="199"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -63,6 +63,10 @@
                                             <constraint firstAttribute="bottomMargin" secondItem="guw-MU-bAJ" secondAttribute="bottom" id="h1x-Jr-d7g"/>
                                             <constraint firstAttribute="trailing" secondItem="WUV-aj-jET" secondAttribute="trailing" id="p3O-Cg-buL"/>
                                         </constraints>
+                                        <connections>
+                                            <outlet property="foodName" destination="guw-MU-bAJ" id="zRO-bg-2EY"/>
+                                            <outlet property="imageProfile" destination="WUV-aj-jET" id="aEc-ef-gsx"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                                 <connections>

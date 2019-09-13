@@ -12,7 +12,9 @@ class DiscoveryViewController: UIViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var searchBar: UISearchBar!
+    
     let itemPerRandom = 50
+    var recipesData: [Recipe] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,10 +27,24 @@ class DiscoveryViewController: UIViewController {
     
     func handleRandomRecipes(recipeResponse: RandomRecipesResponse?, error: Error?){
         if let recipeResponse = recipeResponse{
-            print("Result: \(recipeResponse)")
+            recipesData = recipeResponse.recipes
         }
         else{
             print("ERROR: \(error?.localizedDescription ?? "")")
         }
     }
+}
+
+extension DiscoveryViewController: UICollectionViewDelegate, UICollectionViewDataSource{
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return recipesData.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DiscoveryCell", for: indexPath) as! DiscoveryCell
+        
+        return cell
+    }
+    
+    
 }

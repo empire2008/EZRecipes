@@ -10,4 +10,7 @@ import UIKit
 
 class DiscoveryCell: UICollectionViewCell {
     
+    @IBOutlet weak var imageProfile: UIImageView!
+    @IBOutlet weak var foodName: UILabel!
+    
 }

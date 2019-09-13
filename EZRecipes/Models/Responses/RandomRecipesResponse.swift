@@ -27,13 +27,25 @@ struct Recipe: Codable {
     let instructions: String
     let dishTypes: [String]
     let analyzedInstructions: [AnalyzedInstructions]
+    let extendedIngredients: [IngredientDetail]
 }
 
 struct AnalyzedInstructions: Codable {
-    let steps : [CcokingStep]
+    let steps : [Step]
 }
 
-struct CcokingStep: Codable {
+struct Step: Codable {
     let number: Int
     let step: String
+}
+
+struct IngredientDetail: Codable {
+    let id: Int
+    let image: String
+    let name: String
+    let original: String
+    let originalString: String
+    let originalName: String
+    let amount: Double
+    let unit: String
 }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8D090928232B13EC00716E3A /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D090927232B13EC00716E3A /* DataController.swift */; };
 		8D12C050232953E8008EBF92 /* RandomRecipesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D12C04F232953E8008EBF92 /* RandomRecipesResponse.swift */; };
 		8D12C05223296223008EBF92 /* DiscoveryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D12C05123296223008EBF92 /* DiscoveryViewController.swift */; };
 		8D12C0552329649F008EBF92 /* DiscoveryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D12C0542329649F008EBF92 /* DiscoveryCell.swift */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8D090927232B13EC00716E3A /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		8D12C04F232953E8008EBF92 /* RandomRecipesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomRecipesResponse.swift; sourceTree = "<group>"; };
 		8D12C05123296223008EBF92 /* DiscoveryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveryViewController.swift; sourceTree = "<group>"; };
 		8D12C0542329649F008EBF92 /* DiscoveryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveryCell.swift; sourceTree = "<group>"; };
@@ -96,6 +98,7 @@
 				8D7A66AF23292D6500EA22CB /* Requests */,
 				8D2545D723268E080048B7E9 /* EZRecipes.xcdatamodeld */,
 				8D7A66AD23292D5800EA22CB /* AppClient.swift */,
+				8D090927232B13EC00716E3A /* DataController.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -211,6 +214,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8D090928232B13EC00716E3A /* DataController.swift in Sources */,
 				8D7A66AE23292D5800EA22CB /* AppClient.swift in Sources */,
 				8D12C050232953E8008EBF92 /* RandomRecipesResponse.swift in Sources */,
 				8D2545D923268E080048B7E9 /* EZRecipes.xcdatamodeld in Sources */,
