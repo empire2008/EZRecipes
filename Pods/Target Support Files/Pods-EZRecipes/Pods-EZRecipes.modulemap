@@ -1,0 +1,6 @@
+framework module Pods_EZRecipes {
+  umbrella header "Pods-EZRecipes-umbrella.h"
+
+  export *
+  module * { export * }
+}

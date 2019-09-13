@@ -7,13 +7,14 @@
 //
 
 import UIKit
+import SDWebImage
 
 class DiscoveryViewController: UIViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var searchBar: UISearchBar!
     
-    let itemPerRandom = 15
+    let itemPerRandom = 50
     var recipesData: [Recipe] = []
     
     override func viewDidLoad() {
@@ -27,8 +28,10 @@ class DiscoveryViewController: UIViewController {
     
     func handleRandomRecipes(recipeResponse: RandomRecipesResponse?, error: Error?){
         if let recipeResponse = recipeResponse{
-            recipesData = recipeResponse.recipes
-            collectionView.reloadData()
+            DispatchQueue.main.async {
+                self.recipesData = recipeResponse.recipes
+                self.collectionView.reloadData()
+            }
         }
         else{
             print("ERROR: \(error?.localizedDescription ?? "")")
@@ -36,12 +39,16 @@ class DiscoveryViewController: UIViewController {
     }
     
     func loadImageFromURL(imageUrl: String) -> UIImage?{
-        do{
-            let data = try Data(contentsOf: URL(string: imageUrl)!)
-            return UIImage(data: data)
-        }
-        catch{
-            print("Load image error: \(error.localizedDescription)")
+        DispatchQueue.global(qos: .background).async {
+            do{
+                let data = try Data(contentsOf: URL(string: imageUrl)!)
+                DispatchQueue.main.async {
+                    return UIImage(data: data)
+                }
+            }
+            catch{
+                print("Load image error: \(error.localizedDescription)")
+            }
         }
         return UIImage(named: "")
     }
@@ -55,7 +62,11 @@ extension DiscoveryViewController: UICollectionViewDelegate, UICollectionViewDat
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DiscoveryCell", for: indexPath) as! DiscoveryCell
         cell.foodName.text = recipesData[indexPath.item].title
-        cell.imageProfile.image = loadImageFromURL(imageUrl: recipesData[indexPath.item].image)
+//        cell.imageProfile.image = self.loadImageFromURL(imageUrl: self.recipesData[indexPath.item].image)
+        if recipesData[indexPath.item].image != ""{
+            let url = URL(string: recipesData[indexPath.item].image)
+            cell.imageProfile!.sd_setImage(with: url, completed: nil)
+        }
         return cell
     }
     

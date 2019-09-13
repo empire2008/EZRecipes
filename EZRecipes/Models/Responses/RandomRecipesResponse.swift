@@ -27,7 +27,7 @@ struct Recipe: Codable {
     let instructions: String
     let dishTypes: [String]
     let analyzedInstructions: [AnalyzedInstructions]
-    let extendedIngredients: [IngredientDetail]
+    let extendedIngredients: [IngredientDetail] = []
 }
 
 struct AnalyzedInstructions: Codable {

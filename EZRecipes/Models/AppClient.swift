@@ -31,21 +31,15 @@ class AppClient{
     class func requestRandomRecipes(itemAmount: Int, complition: @escaping (RandomRecipesResponse?, Error?) -> Void){
         let task = URLSession.shared.dataTask(with: EndPoint.randomRecipes(itemAmount).url) { data, response, error in
             guard let data = data else{
-                DispatchQueue.main.async {
-                    complition(nil, error)
-                }
+                complition(nil, error)
                 return
             }
             do{
                 let responseObject = try JSONDecoder().decode(RandomRecipesResponse.self, from: data)
-                DispatchQueue.main.async {
-                    complition(responseObject, nil)
-                }
+                complition(responseObject, nil)
             }
             catch{
-                DispatchQueue.main.async {
-                    complition(nil, error)
-                }
+                complition(nil, error)
             }
         }
         task.resume()
