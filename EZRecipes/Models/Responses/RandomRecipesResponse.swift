@@ -40,7 +40,7 @@ struct Step: Codable {
 }
 
 struct IngredientDetail: Codable {
-    let id: Int
+    let id: Double
     let image: String
     let name: String
     let original: String
