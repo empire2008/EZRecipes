@@ -13,12 +13,15 @@ class DiscoveryViewController: UIViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var noRecipeDataView: UIView!
+    @IBOutlet weak var loadingActivityView: UIActivityIndicatorView!
     
-    let itemPerRandom = 50
+    let itemPerRandom = 51
     var recipesData: [Recipe] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadingActivityView.startAnimating()
         randomRecipes()
     }
     
@@ -30,6 +33,7 @@ class DiscoveryViewController: UIViewController {
         if let recipeResponse = recipeResponse{
             DispatchQueue.main.async {
                 self.recipesData = recipeResponse.recipes
+                self.loadingActivityView.stopAnimating()
                 self.collectionView.reloadData()
             }
         }
@@ -38,19 +42,9 @@ class DiscoveryViewController: UIViewController {
         }
     }
     
-    func loadImageFromURL(imageUrl: String) -> UIImage?{
-        DispatchQueue.global(qos: .background).async {
-            do{
-                let data = try Data(contentsOf: URL(string: imageUrl)!)
-                DispatchQueue.main.async {
-                    return UIImage(data: data)
-                }
-            }
-            catch{
-                print("Load image error: \(error.localizedDescription)")
-            }
-        }
-        return UIImage(named: "")
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let vc = segue.destination as! DiscoveryDetailViewController
+        vc.recipe = sender as? Recipe
     }
 }
 
@@ -62,12 +56,20 @@ extension DiscoveryViewController: UICollectionViewDelegate, UICollectionViewDat
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DiscoveryCell", for: indexPath) as! DiscoveryCell
         cell.foodName.text = recipesData[indexPath.item].title
-//        cell.imageProfile.image = self.loadImageFromURL(imageUrl: self.recipesData[indexPath.item].image)
+        cell.loadingActivity.startAnimating()
+
         if recipesData[indexPath.item].image != ""{
             let url = URL(string: recipesData[indexPath.item].image)
-            cell.imageProfile!.sd_setImage(with: url, completed: nil)
+//            cell.imageProfile!.sd_setImage(with: url, completed: nil)
+            cell.imageProfile!.sd_setImage(with: url) { (image, error, sdCatch, url) in
+                cell.loadingActivity.stopAnimating()
+            }
         }
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "showDetail", sender: recipesData[indexPath.item])
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

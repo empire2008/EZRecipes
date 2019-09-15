@@ -9,43 +9,43 @@
 import Foundation
 
 struct RandomRecipesResponse: Codable {
-    let recipes: [Recipe]
+    var recipes: [Recipe]
 }
 
 struct Recipe: Codable {
-    let id: Int
-    let title: String
-    let image: String
-    let imageType: String
-    let readyInMinutes: Int
-    let servings: Int
-    let healthScore: Int
-    let vegetarian: Bool
-    let vegan: Bool
-    let glutenFree: Bool
-    let dairyFree: Bool
-    let instructions: String
-    let dishTypes: [String]
-    let analyzedInstructions: [AnalyzedInstructions]
-    let extendedIngredients: [IngredientDetail] = []
+    var id: Int = -1
+    var title: String = ""
+    var image: String = ""
+    var imageType: String = ""
+//    let readyInMinutes: Int
+//    let servings: Int
+//    let healthScore: Int
+//    let vegetarian: Bool
+//    let vegan: Bool
+//    let glutenFree: Bool
+//    let dairyFree: Bool
+    var instructions: String = ""
+//    let dishTypes: [String]
+    var analyzedInstructions: [AnalyzedInstructions] = []
+    var extendedIngredients: [IngredientDetail] = []
 }
 
 struct AnalyzedInstructions: Codable {
-    let steps : [Step]
+    var steps : [Step] = []
 }
 
 struct Step: Codable {
-    let number: Int
-    let step: String
+    var number: Int = -1
+    var step: String = ""
 }
 
 struct IngredientDetail: Codable {
-    let id: Double
-    let image: String
-    let name: String
-    let original: String
-    let originalString: String
-    let originalName: String
-    let amount: Double
-    let unit: String
+    let id: Double = -1
+    let image: String = ""
+    let name: String = ""
+    let original: String = ""
+    let originalString: String = ""
+    let originalName: String = ""
+    let amount: Double = 0
+    let unit: String = ""
 }

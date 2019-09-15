@@ -3,29 +3,43 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		6FCA83502CA1FB430B21D38D /* Pods_EZRecipes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85E2A755199D5BD2AE1A9B86 /* Pods_EZRecipes.framework */; };
 		8D090928232B13EC00716E3A /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D090927232B13EC00716E3A /* DataController.swift */; };
+		8D0A4535232B640700A6A50F /* MyRecipesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0A4534232B640700A6A50F /* MyRecipesViewController.swift */; };
+		8D0A4538232B680D00A6A50F /* MyRecipeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0A4537232B680D00A6A50F /* MyRecipeCell.swift */; };
 		8D12C050232953E8008EBF92 /* RandomRecipesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D12C04F232953E8008EBF92 /* RandomRecipesResponse.swift */; };
 		8D12C05223296223008EBF92 /* DiscoveryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D12C05123296223008EBF92 /* DiscoveryViewController.swift */; };
 		8D12C0552329649F008EBF92 /* DiscoveryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D12C0542329649F008EBF92 /* DiscoveryCell.swift */; };
+		8D1A0414232E8D9B00ADF5E1 /* AddIngredientViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1A0413232E8D9B00ADF5E1 /* AddIngredientViewController.swift */; };
+		8D1A0417232E8FE700ADF5E1 /* keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1A0416232E8FE700ADF5E1 /* keyboard.swift */; };
+		8D1A0419232E948300ADF5E1 /* TimeStamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1A0418232E948300ADF5E1 /* TimeStamp.swift */; };
+		8D1A041C232E961100ADF5E1 /* IngredientCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1A041B232E961100ADF5E1 /* IngredientCell.swift */; };
 		8D2545D123268E080048B7E9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D2545D023268E080048B7E9 /* AppDelegate.swift */; };
 		8D2545D623268E080048B7E9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D2545D423268E080048B7E9 /* Main.storyboard */; };
 		8D2545D923268E080048B7E9 /* EZRecipes.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8D2545D723268E080048B7E9 /* EZRecipes.xcdatamodeld */; };
 		8D2545DB23268E0C0048B7E9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D2545DA23268E0C0048B7E9 /* Assets.xcassets */; };
 		8D2545DE23268E0C0048B7E9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D2545DC23268E0C0048B7E9 /* LaunchScreen.storyboard */; };
 		8D7A66AE23292D5800EA22CB /* AppClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7A66AD23292D5800EA22CB /* AppClient.swift */; };
+		8DCE747C232C913E008E33DA /* DiscoveryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCE747B232C913E008E33DA /* DiscoveryDetailViewController.swift */; };
+		8DCE7493232CBC3E008E33DA /* MainCreateRecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCE7492232CBC3E008E33DA /* MainCreateRecipeViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		85E2A755199D5BD2AE1A9B86 /* Pods_EZRecipes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EZRecipes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D090927232B13EC00716E3A /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
+		8D0A4534232B640700A6A50F /* MyRecipesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecipesViewController.swift; sourceTree = "<group>"; };
+		8D0A4537232B680D00A6A50F /* MyRecipeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecipeCell.swift; sourceTree = "<group>"; };
 		8D12C04F232953E8008EBF92 /* RandomRecipesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomRecipesResponse.swift; sourceTree = "<group>"; };
 		8D12C05123296223008EBF92 /* DiscoveryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveryViewController.swift; sourceTree = "<group>"; };
 		8D12C0542329649F008EBF92 /* DiscoveryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveryCell.swift; sourceTree = "<group>"; };
+		8D1A0413232E8D9B00ADF5E1 /* AddIngredientViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddIngredientViewController.swift; sourceTree = "<group>"; };
+		8D1A0416232E8FE700ADF5E1 /* keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = keyboard.swift; sourceTree = "<group>"; };
+		8D1A0418232E948300ADF5E1 /* TimeStamp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeStamp.swift; sourceTree = "<group>"; };
+		8D1A041B232E961100ADF5E1 /* IngredientCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientCell.swift; sourceTree = "<group>"; };
 		8D2545CD23268E080048B7E9 /* EZRecipes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EZRecipes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D2545D023268E080048B7E9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8D2545D523268E080048B7E9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -34,6 +48,8 @@
 		8D2545DD23268E0C0048B7E9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8D2545DF23268E0C0048B7E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D7A66AD23292D5800EA22CB /* AppClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppClient.swift; sourceTree = "<group>"; };
+		8DCE747B232C913E008E33DA /* DiscoveryDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveryDetailViewController.swift; sourceTree = "<group>"; };
+		8DCE7492232CBC3E008E33DA /* MainCreateRecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCreateRecipeViewController.swift; sourceTree = "<group>"; };
 		BBE7B3230B372189E5868BA0 /* Pods-EZRecipes.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EZRecipes.release.xcconfig"; path = "Target Support Files/Pods-EZRecipes/Pods-EZRecipes.release.xcconfig"; sourceTree = "<group>"; };
 		C65B00F08DD5CCAA8F9D55D0 /* Pods-EZRecipes.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EZRecipes.debug.xcconfig"; path = "Target Support Files/Pods-EZRecipes/Pods-EZRecipes.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -56,8 +72,16 @@
 				C65B00F08DD5CCAA8F9D55D0 /* Pods-EZRecipes.debug.xcconfig */,
 				BBE7B3230B372189E5868BA0 /* Pods-EZRecipes.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		8D0A4536232B67E900A6A50F /* MyRecipeCells */ = {
+			isa = PBXGroup;
+			children = (
+				8D0A4537232B680D00A6A50F /* MyRecipeCell.swift */,
+				8D1A041B232E961100ADF5E1 /* IngredientCell.swift */,
+			);
+			path = MyRecipeCells;
 			sourceTree = "<group>";
 		};
 		8D12C05323296486008EBF92 /* DiscoveryCells */ = {
@@ -66,6 +90,22 @@
 				8D12C0542329649F008EBF92 /* DiscoveryCell.swift */,
 			);
 			path = DiscoveryCells;
+			sourceTree = "<group>";
+		};
+		8D1A0415232E8FD700ADF5E1 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				8D1A0416232E8FE700ADF5E1 /* keyboard.swift */,
+				8D1A0418232E948300ADF5E1 /* TimeStamp.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		8D1A041A232E95F200ADF5E1 /* IngredientCells */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = IngredientCells;
 			sourceTree = "<group>";
 		};
 		8D2545C423268E080048B7E9 = {
@@ -92,6 +132,7 @@
 				8D2545D023268E080048B7E9 /* AppDelegate.swift */,
 				8D7A66AA23291DE600EA22CB /* Assets */,
 				8D7A66A923291DDF00EA22CB /* Models */,
+				8D1A0415232E8FD700ADF5E1 /* Extensions */,
 				8D7A66A823291DD500EA22CB /* ViewControllers */,
 				8D7A66AC23291E2900EA22CB /* Views */,
 				8D7A66AB23291DF700EA22CB /* Supports */,
@@ -102,8 +143,14 @@
 		8D7A66A823291DD500EA22CB /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				8D1A041A232E95F200ADF5E1 /* IngredientCells */,
+				8D0A4536232B67E900A6A50F /* MyRecipeCells */,
 				8D12C05323296486008EBF92 /* DiscoveryCells */,
 				8D12C05123296223008EBF92 /* DiscoveryViewController.swift */,
+				8D0A4534232B640700A6A50F /* MyRecipesViewController.swift */,
+				8DCE747B232C913E008E33DA /* DiscoveryDetailViewController.swift */,
+				8DCE7492232CBC3E008E33DA /* MainCreateRecipeViewController.swift */,
+				8D1A0413232E8D9B00ADF5E1 /* AddIngredientViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -283,11 +330,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8D0A4538232B680D00A6A50F /* MyRecipeCell.swift in Sources */,
+				8D1A0414232E8D9B00ADF5E1 /* AddIngredientViewController.swift in Sources */,
+				8D0A4535232B640700A6A50F /* MyRecipesViewController.swift in Sources */,
 				8D090928232B13EC00716E3A /* DataController.swift in Sources */,
 				8D7A66AE23292D5800EA22CB /* AppClient.swift in Sources */,
+				8DCE747C232C913E008E33DA /* DiscoveryDetailViewController.swift in Sources */,
 				8D12C050232953E8008EBF92 /* RandomRecipesResponse.swift in Sources */,
 				8D2545D923268E080048B7E9 /* EZRecipes.xcdatamodeld in Sources */,
+				8D1A0419232E948300ADF5E1 /* TimeStamp.swift in Sources */,
+				8DCE7493232CBC3E008E33DA /* MainCreateRecipeViewController.swift in Sources */,
 				8D2545D123268E080048B7E9 /* AppDelegate.swift in Sources */,
+				8D1A041C232E961100ADF5E1 /* IngredientCell.swift in Sources */,
+				8D1A0417232E8FE700ADF5E1 /* keyboard.swift in Sources */,
 				8D12C0552329649F008EBF92 /* DiscoveryCell.swift in Sources */,
 				8D12C05223296223008EBF92 /* DiscoveryViewController.swift in Sources */,
 			);
