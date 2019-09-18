@@ -35,8 +35,8 @@ class DiscoveryDetailViewController: UIViewController {
                     ingredientStackView.addArrangedSubview(stepLabel)
                     stepLabel.translatesAutoresizingMaskIntoConstraints = false
                     stepLabel.topAnchor.constraint(equalTo: ingredientStackView.topAnchor).isActive = true
+                    stepLabel.bottomAnchor.constraint(equalTo: ingredientStackView.bottomAnchor).isActive = true
                     stepLabel.heightAnchor.constraint(equalToConstant: 200).isActive = true
-                    stepLabel.widthAnchor.constraint(equalToConstant: 200).isActive = true
                     stepLabel.leftAnchor.constraint(equalTo: ingredientStackView.leftAnchor).isActive = true
                     stepLabel.rightAnchor.constraint(equalTo: ingredientStackView.rightAnchor).isActive = true
                 }
