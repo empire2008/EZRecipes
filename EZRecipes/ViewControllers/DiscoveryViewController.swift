@@ -16,7 +16,7 @@ class DiscoveryViewController: UIViewController {
     @IBOutlet weak var noRecipeDataView: UIView!
     @IBOutlet weak var loadingActivityView: UIActivityIndicatorView!
     
-    let itemPerRandom = 51
+    let itemPerRandom = 9
     var recipesData: [Recipe] = []
     
     override func viewDidLoad() {

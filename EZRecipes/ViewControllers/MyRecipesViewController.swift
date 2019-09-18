@@ -22,11 +22,11 @@ class MyRecipesViewController: UIViewController {
         tableView.register(MyRecipeCell.self, forCellReuseIdentifier: "MyRecipeCell")
     }
     override func viewWillAppear(_ animated: Bool) {
-        viewWillAppear(animated)
+        super.viewWillAppear(animated)
         setupFetchedResultsController()
     }
     override func viewDidDisappear(_ animated: Bool) {
-        viewDidDisappear(animated)
+        super.viewDidDisappear(animated)
         fetchedResultsController = nil
     }
     
@@ -60,15 +60,26 @@ extension MyRecipesViewController: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "MyRecipeCell") as! MyRecipeCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MyRecipeCell")
         let aRecipe = fetchedResultsController.object(at: indexPath)
         if aRecipe.imageOfRecipe == nil{
             // save imageUrl to imageData
             
         }
         cell?.selectionStyle = .none
+        if aRecipe.imageOfRecipe != nil{
+            cell?.imageView?.image = UIImage(data: aRecipe.imageOfRecipe!)
+        }
+        else{
+            cell?.imageView?.image = UIImage(named: "placeholder")
+        }
+        cell?.textLabel?.numberOfLines = 0
         cell?.textLabel?.text = aRecipe.nameOfRecipe
         return cell!
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 75
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

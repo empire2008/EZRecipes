@@ -145,10 +145,10 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YCy-Bk-d4t">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="371.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="246.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="HT4-7s-LKm">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="371.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="246.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recipe Name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Mc-OW-wmI">
                                                         <rect key="frame" x="0.0" y="0.0" width="414" height="26.5"/>
@@ -162,24 +162,39 @@
                                                             <constraint firstAttribute="height" constant="200" id="0AS-De-KHm"/>
                                                         </constraints>
                                                     </imageView>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chef Note" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G7V-1Z-xty">
-                                                        <rect key="frame" x="0.0" y="266.5" width="414" height="24"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ingredients" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="66z-RF-C58">
-                                                        <rect key="frame" x="0.0" y="310.5" width="414" height="20.5"/>
-                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zh0-hW-f23">
-                                                        <rect key="frame" x="0.0" y="351" width="414" height="20.5"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
+                                                    <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="48k-kO-cHM">
+                                                        <rect key="frame" x="0.0" y="246.5" width="414" height="0.0"/>
+                                                        <subviews>
+                                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chef Note" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G7V-1Z-xty">
+                                                                <rect key="frame" x="0.0" y="0.0" width="89" height="0.0"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Fz7-CN-XD9">
+                                                        <rect key="frame" x="0.0" y="246.5" width="414" height="0.0"/>
+                                                        <subviews>
+                                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ingredients" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="66z-RF-C58">
+                                                                <rect key="frame" x="0.0" y="0.0" width="94" height="0.0"/>
+                                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="er4-r4-wjC">
+                                                        <rect key="frame" x="0.0" y="246.5" width="414" height="0.0"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cooking Step" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zh0-hW-f23">
+                                                                <rect key="frame" x="0.0" y="0.0" width="414" height="0.0"/>
+                                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                    </stackView>
                                                 </subviews>
                                             </stackView>
                                         </subviews>
@@ -213,9 +228,12 @@
                     </view>
                     <connections>
                         <outlet property="chefNote" destination="G7V-1Z-xty" id="48I-vA-y1S"/>
+                        <outlet property="chefNoteStackView" destination="48k-kO-cHM" id="tms-oc-h3O"/>
                         <outlet property="ingredient" destination="Zh0-hW-f23" id="xzz-Xl-y4G"/>
+                        <outlet property="ingredientStackView" destination="Fz7-CN-XD9" id="eSe-xi-GAn"/>
                         <outlet property="recipeImage" destination="U1b-lx-nJ4" id="ghE-3o-3fS"/>
                         <outlet property="recipeName" destination="0Mc-OW-wmI" id="PKc-fK-GRZ"/>
+                        <outlet property="stepStackView" destination="er4-r4-wjC" id="BO7-p7-LOE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bPc-nc-8db" userLabel="First Responder" sceneMemberID="firstResponder"/>

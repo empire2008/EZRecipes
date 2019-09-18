@@ -23,9 +23,6 @@ class ChefNoteViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         hideKeyboardWhenTappedAround()
-        recipeDataModel = CookingRecipe(context: dataController.viewContext)
-        ingredientDataModel = Ingredient(context: dataController.viewContext)
-        stepDataModel = CookingStep(context: dataController.viewContext)
     }
     @IBAction func closeButton(_ sender: Any) {
         self.view.window!.rootViewController?.dismiss(animated: false, completion: nil)
@@ -35,6 +32,10 @@ class ChefNoteViewController: UIViewController {
     }
     @IBAction func saveButton(_ sender: Any) {
         recipe.instruction = note.text
+        
+        recipeDataModel = CookingRecipe(context: dataController.viewContext)
+        ingredientDataModel = Ingredient(context: dataController.viewContext)
+        stepDataModel = CookingStep(context: dataController.viewContext)
         
         saveRecipeDataModel()
         saveIngredientDataModel()
