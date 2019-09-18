@@ -10,15 +10,8 @@ import UIKit
 
 class MyRecipeCell: UITableViewCell {
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
+    @IBOutlet weak var loadingActivity: UIActivityIndicatorView!
+    @IBOutlet weak var recipePhoto: UIImageView!
+    @IBOutlet weak var name: UILabel!
+    
 }

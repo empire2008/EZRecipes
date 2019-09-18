@@ -29,13 +29,23 @@ class DataController{
 extension DataController{
     func saveContext(){
         let context = persistentContainer.viewContext
-        if context.hasChanges{
-            do{
-                try context.save()
-            }
-            catch{
-                print("Save error")
-            }
+        do{
+            try context.save()
+        }
+        catch{
+            print("Save error")
+        }
+    }
+    
+    func saveContext(completion: @escaping (Bool, Error?) -> Void){
+        let context = persistentContainer.viewContext
+        do{
+            try context.save()
+            completion(true, nil)
+        }
+        catch{
+            print("Save error")
+            completion(false, error)
         }
     }
 }

@@ -21,11 +21,12 @@ class DiscoveryViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadingActivityView.startAnimating()
+        
         randomRecipes()
     }
     
     func randomRecipes(){
+        loadingActivityView.startAnimating()
         AppClient.requestRandomRecipes(itemAmount: itemPerRandom, complition: handleRandomRecipes(recipeResponse:error:))
     }
     
@@ -42,6 +43,9 @@ class DiscoveryViewController: UIViewController {
         }
     }
     
+    @IBAction func refreshButton(_ sender: Any) {
+        randomRecipes()
+    }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let vc = segue.destination as! DiscoveryDetailViewController
         vc.recipe = sender as? Recipe
@@ -60,7 +64,6 @@ extension DiscoveryViewController: UICollectionViewDelegate, UICollectionViewDat
 
         if recipesData[indexPath.item].image != ""{
             let url = URL(string: recipesData[indexPath.item].image)
-//            cell.imageProfile!.sd_setImage(with: url, completed: nil)
             cell.imageProfile!.sd_setImage(with: url) { (image, error, sdCatch, url) in
                 cell.loadingActivity.stopAnimating()
             }

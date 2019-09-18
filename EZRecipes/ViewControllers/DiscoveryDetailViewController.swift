@@ -20,6 +20,8 @@ class DiscoveryDetailViewController: UIViewController {
     @IBOutlet weak var stepStackView: UIStackView!
     
     var recipe: Recipe!
+    var dataController: DataController!
+    var appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,6 +46,45 @@ class DiscoveryDetailViewController: UIViewController {
         }
     }
     
+    @IBAction func saveToLocal(_ sender: Any) {
+        dataController = appDelegate.dataController
+        let cookingRecipe = CookingRecipe(context: dataController.viewContext)
+        cookingRecipe.id = Date().timeStamp()
+        cookingRecipe.imageUrl = recipe.image
+        cookingRecipe.nameOfRecipe = recipe.title
+        
+        if !recipe.extendedIngredients.isEmpty{
+            for i in recipe.extendedIngredients{
+                let ingredient = Ingredient(context: dataController.viewContext)
+                ingredient.amount = String(i.amount)
+                ingredient.name = i.name
+                ingredient.unit = i.unit
+                ingredient.recipeId = cookingRecipe.id
+                dataController.saveContext()
+            }
+        }
+        
+        if !recipe.analyzedInstructions.isEmpty{
+            if !recipe.analyzedInstructions[0].steps.isEmpty{
+                for index in 0..<recipe.analyzedInstructions[0].steps.count{
+                    let step = CookingStep(context: dataController.viewContext)
+                    step.recipeId = cookingRecipe.id
+                    step.number = Int64(recipe.analyzedInstructions[0].steps[index].number)
+                    step.stepDescription = recipe.analyzedInstructions[0].steps[index].step
+                    dataController.saveContext()
+                }
+            }
+        }
+
+        dataController.saveContext { (success, error) in
+            if success{
+                self.popupAlert(title: "Saved", message: "This recipe already saved to My Recipe")
+            }
+            else{
+                self.popupAlert(title: "Save Failed!", message: "Please try again!")
+            }
+        }
+    }
     func setHeader(){
         recipeName.text = recipe.title
         recipeImage.sd_setImage(with: URL(string: recipe.image), completed: nil)

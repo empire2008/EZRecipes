@@ -19,7 +19,6 @@ class MyRecipesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         dataController = appDelegate.dataController
-        tableView.register(MyRecipeCell.self, forCellReuseIdentifier: "MyRecipeCell")
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -60,26 +59,24 @@ extension MyRecipesViewController: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "MyRecipeCell")
         let aRecipe = fetchedResultsController.object(at: indexPath)
-        if aRecipe.imageOfRecipe == nil{
-            // save imageUrl to imageData
-            
-        }
-        cell?.selectionStyle = .none
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MyRecipeCell") as! MyRecipeCell
+
+        cell.selectionStyle = .none
         if aRecipe.imageOfRecipe != nil{
-            cell?.imageView?.image = UIImage(data: aRecipe.imageOfRecipe!)
+            cell.recipePhoto.image = UIImage(data: aRecipe.imageOfRecipe!)
+        }
+        else if aRecipe.imageUrl != ""{
+            cell.loadingActivity.startAnimating()
+            cell.recipePhoto.sd_setImage(with: URL(string: aRecipe.imageUrl!)) { (image, erro, cache, url) in
+                cell.loadingActivity.stopAnimating()
+            }
         }
         else{
-            cell?.imageView?.image = UIImage(named: "placeholder")
+            cell.recipePhoto.image = UIImage(named: "placeholder")
         }
-        cell?.textLabel?.numberOfLines = 0
-        cell?.textLabel?.text = aRecipe.nameOfRecipe
-        return cell!
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 75
+        cell.name.text = aRecipe.nameOfRecipe
+        return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
