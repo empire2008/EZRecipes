@@ -22,13 +22,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         return true
     }
-
-    func applicationDidEnterBackground(_ application: UIApplication) {
-        dataController.saveContext()
-    }
-
-    func applicationWillTerminate(_ application: UIApplication) {
-        dataController.saveContext()
-    }
 }
 

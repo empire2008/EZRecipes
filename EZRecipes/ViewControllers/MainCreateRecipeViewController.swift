@@ -15,12 +15,11 @@ class MainCreateRecipeViewController: UIViewController {
     @IBOutlet weak var recipePhoto: UIImageView!
     
     var dataController: DataController!
-    var recipe: CookingRecipe!
+    var recipe = RecipeStructure()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         hideKeyboardWhenTappedAround()
-        recipe = CookingRecipe(context: dataController.viewContext)
     }
     
     func imagePicker(sourceType: UIImagePickerController.SourceType){
@@ -50,7 +49,7 @@ class MainCreateRecipeViewController: UIViewController {
     }
     @IBAction func nextButton(_ sender: Any) {
         if recipeName.text != ""{
-            recipe.id = Date().timeStamp()
+            recipe.id = Int(Date().timeStamp())
             recipe.nameOfRecipe = recipeName.text!
             performSegue(withIdentifier: "nextStep", sender: recipe)
         }

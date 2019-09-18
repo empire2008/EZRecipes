@@ -20,7 +20,14 @@ class MyRecipesViewController: UIViewController {
         super.viewDidLoad()
         dataController = appDelegate.dataController
         tableView.register(MyRecipeCell.self, forCellReuseIdentifier: "MyRecipeCell")
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        viewWillAppear(animated)
         setupFetchedResultsController()
+    }
+    override func viewDidDisappear(_ animated: Bool) {
+        viewDidDisappear(animated)
+        fetchedResultsController = nil
     }
     
     fileprivate func setupFetchedResultsController() {
@@ -53,7 +60,7 @@ extension MyRecipesViewController: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "MyRecipeCell")
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MyRecipeCell") as! MyRecipeCell
         let aRecipe = fetchedResultsController.object(at: indexPath)
         if aRecipe.imageOfRecipe == nil{
             // save imageUrl to imageData
@@ -70,5 +77,21 @@ extension MyRecipesViewController: UITableViewDelegate, UITableViewDataSource{
 }
 
 extension MyRecipesViewController: NSFetchedResultsControllerDelegate{
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.beginUpdates()
+    }
     
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.endUpdates()
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        switch type {
+        case .insert: tableView.insertRows(at: [newIndexPath!], with: .fade)
+        case .delete: tableView.deleteRows(at: [indexPath!], with: .fade)
+        case .update: tableView.reloadRows(at: [indexPath!], with: .fade)
+        case .move: tableView.moveRow(at: indexPath!, to: newIndexPath!)
+        default: break
+        }
+    }
 }
