@@ -92,7 +92,7 @@ class DetailViewController: UIViewController {
         let fetchRequest: NSFetchRequest<CookingStep> = CookingStep.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "recipe == %@", localRecipe)
         let sortDescriptor = NSSortDescriptor(key: "number", ascending: false)
-        fetchRequest.sortDescriptors = [sortDescriptor].reversed()
+        fetchRequest.sortDescriptors = [sortDescriptor.reversedSortDescriptor] as? [NSSortDescriptor]
         if let result = try? dataController.viewContext.fetch(fetchRequest){
             localCookingSteps = result
         }
@@ -116,7 +116,7 @@ class DetailViewController: UIViewController {
         if !recipe.analyzedInstructions.isEmpty{
             if !recipe.analyzedInstructions[0].steps.isEmpty{
                 stepStackView.isHidden = false
-                for step in recipe.analyzedInstructions[0].steps{
+                for step in recipe.analyzedInstructions[0].steps.reversed(){
                     createStepPattern(number: "\(step.number)", step: step.step)
                 }
             }
