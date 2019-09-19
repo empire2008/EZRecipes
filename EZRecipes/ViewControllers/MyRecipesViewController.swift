@@ -25,10 +25,6 @@ class MyRecipesViewController: UIViewController {
         setupFetchedResultsController()
         tableView.reloadData()
     }
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        fetchedResultsController = nil
-    }
     
     fileprivate func setupFetchedResultsController() {
         let fetchedRequest: NSFetchRequest<CookingRecipe> = CookingRecipe.fetchRequest()

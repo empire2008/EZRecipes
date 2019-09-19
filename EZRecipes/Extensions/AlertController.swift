@@ -23,4 +23,12 @@ extension UIViewController{
         
         present(alert, animated: true, completion: nil)
     }
+    
+    func popupQuestion(title: String, message: String, completion: @escaping (UIAlertAction) -> Void){
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: completion))
+        
+        present(alert, animated: true, completion: nil)
+    }
 }

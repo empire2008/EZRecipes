@@ -17,8 +17,6 @@ class ChefNoteViewController: UIViewController {
     var ingredients: [IngredientStructure]!
     var steps: [StepStructure]!
     var recipeDataModel: CookingRecipe!
-    var ingredientDataModel: Ingredient!
-    var stepDataModel: CookingStep!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,10 +30,7 @@ class ChefNoteViewController: UIViewController {
     }
     @IBAction func saveButton(_ sender: Any) {
         recipe.instruction = note.text
-        
         recipeDataModel = CookingRecipe(context: dataController.viewContext)
-        ingredientDataModel = Ingredient(context: dataController.viewContext)
-        stepDataModel = CookingStep(context: dataController.viewContext)
         
         saveRecipeDataModel()
         saveIngredientDataModel()
@@ -55,6 +50,7 @@ class ChefNoteViewController: UIViewController {
     
     func saveIngredientDataModel(){
         for ingredient in ingredients{
+            let ingredientDataModel = Ingredient(context: dataController.viewContext)
             ingredientDataModel.amount = ingredient.amount
             ingredientDataModel.unit = ingredient.unit
             ingredientDataModel.name = ingredient.name
@@ -65,6 +61,7 @@ class ChefNoteViewController: UIViewController {
     
     func saveStepDataModel(){
         for index in 0..<steps.count{
+            let stepDataModel = CookingStep(context: dataController.viewContext)
             stepDataModel.recipeId = recipeDataModel.id
             stepDataModel.stepDescription = steps[index].stepDescription
             stepDataModel.image = steps[index].image

@@ -46,6 +46,7 @@ class DetailViewController: UIViewController {
             fetchIngredients()
             fetchCookingSteps()
             loadLocalRecipe()
+            setLocalToolbar()
         }
     }
     
@@ -73,7 +74,7 @@ class DetailViewController: UIViewController {
         if !localCookingSteps.isEmpty{
             stepStackView.isHidden = false
             for step in localCookingSteps{
-                createStepPattern(number: "\(step.number)", step: step.stepDescription ?? "")
+                createStepPattern(number: "\(step.number)", step: step.stepDescription ?? "", imageData: step.image ?? nil)
             }
         }
     }
@@ -131,11 +132,21 @@ class DetailViewController: UIViewController {
         }
     }
     
-    func createStepPattern(number: String, step: String){
+    func createStepPattern(number: String, step: String, imageData: Data? = nil){
         let stepLabel = UILabel()
         stepLabel.text = "\(number). \(step)"
         stepLabel.numberOfLines = 0
         stepStackView.addArrangedSubview(stepLabel)
+        
+        if let imageData = imageData{
+            let stepPhotoView = UIImageView()
+            stepPhotoView.image = UIImage(data: imageData)
+            stepPhotoView.translatesAutoresizingMaskIntoConstraints = false
+            stepPhotoView.heightAnchor.constraint(equalToConstant: 200).isActive = true
+            stepPhotoView.contentMode = .scaleAspectFit
+            stepStackView.addArrangedSubview(stepPhotoView)
+        }
+        
     }
     
     func createIngredientPattern(name: String, amount: String, unit: String){
@@ -163,9 +174,30 @@ class DetailViewController: UIViewController {
     
     // MARK: Set Toolbar for Local View
     func setLocalToolbar(){
-        
+        let deleteButton = UIButton()
+        deleteButton.setImage(UIImage(named: "delete"), for: .normal)
+        deleteButton.addTarget(self, action: #selector(deleteRecipe), for: .touchUpInside)
+        self.topToolBar.addSubview(deleteButton)
+        deleteButton.translatesAutoresizingMaskIntoConstraints = false
+        deleteButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        deleteButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
+        deleteButton.rightAnchor.constraint(equalTo: topToolBar.rightAnchor, constant: -12).isActive = true
+        deleteButton.centerYAnchor.constraint(equalTo: topToolBar.centerYAnchor).isActive = true
     }
     
+    @objc func deleteRecipe(){
+        popupQuestion(title: "Delete Confirmation", message: "Would you like to delete this recipe?") { (action) in
+            self.dataController.viewContext.delete(self.localRecipe)
+            self.dataController.saveContext(completion: { (success, error) in
+                if success{
+                    self.dismiss(animated: true, completion: nil)
+                }
+                else{
+                    self.popupAlert(title: "Delete Failed", message: "Please try again!")
+                }
+            })
+        }
+    }
     // MARK: Set Toolbar for Discovery View
     func setDiscoveryToolbar(){
         saveButton = UIButton()
@@ -190,7 +222,7 @@ class DetailViewController: UIViewController {
         if !recipe.extendedIngredients.isEmpty{
             for i in recipe.extendedIngredients{
                 let ingredient = Ingredient(context: dataController.viewContext)
-                //                ingredient.amount = String(i.amount)
+                ingredient.amount = "\(i.amount ?? 0)"
                 ingredient.name = i.name
                 ingredient.unit = i.unit
                 ingredient.recipeId = cookingRecipe.id

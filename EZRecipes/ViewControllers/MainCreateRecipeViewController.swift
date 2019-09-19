@@ -53,6 +53,9 @@ class MainCreateRecipeViewController: UIViewController {
             recipe.nameOfRecipe = recipeName.text!
             performSegue(withIdentifier: "nextStep", sender: recipe)
         }
+        else{
+            emptyFieldAlertPopup()
+        }
     }
 }
 
