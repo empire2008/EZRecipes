@@ -40,12 +40,12 @@ struct Step: Codable {
 }
 
 struct IngredientDetail: Codable {
-    let id: Double = -1
-    let image: String = ""
-    let name: String = ""
-    let original: String = ""
-    let originalString: String = ""
-    let originalName: String = ""
-    let amount: Double = 0
-    let unit: String = ""
+    let id: Double
+//    let image: String
+    let name: String
+//    let original: String = ""
+//    let originalString: String = ""
+//    let originalName: String = ""
+    let amount: Double?
+    let unit: String?
 }

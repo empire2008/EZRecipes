@@ -66,7 +66,7 @@ extension MyRecipesViewController: UITableViewDelegate, UITableViewDataSource{
         if aRecipe.imageOfRecipe != nil{
             cell.recipePhoto.image = UIImage(data: aRecipe.imageOfRecipe!)
         }
-        else if aRecipe.imageUrl != ""{
+        else if aRecipe.imageUrl != "" && aRecipe.imageUrl != nil{
             cell.loadingActivity.startAnimating()
             cell.recipePhoto.sd_setImage(with: URL(string: aRecipe.imageUrl!)) { (image, erro, cache, url) in
                 cell.loadingActivity.stopAnimating()

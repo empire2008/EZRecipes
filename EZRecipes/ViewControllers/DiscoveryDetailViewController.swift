@@ -18,6 +18,7 @@ class DiscoveryDetailViewController: UIViewController {
     @IBOutlet weak var chefNoteStackView: UIStackView!
     @IBOutlet weak var ingredientStackView: UIStackView!
     @IBOutlet weak var stepStackView: UIStackView!
+    @IBOutlet weak var saveButton: UIBarButtonItem!
     
     var recipe: Recipe!
     var dataController: DataController!
@@ -26,6 +27,31 @@ class DiscoveryDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setHeader()
+        print(recipe.extendedIngredients)
+        if !recipe.extendedIngredients.isEmpty{
+            ingredientStackView.isHidden = false
+            for ingredient in recipe.extendedIngredients{
+                let stackView = UIStackView()
+                stackView.axis = .horizontal
+                stackView.distribution = .fillEqually
+                ingredientStackView.addArrangedSubview(stackView)
+                
+                let label = UILabel()
+                label.numberOfLines = 0
+                label.text = " - \(ingredient.name)"
+                
+                let amount = UILabel()
+                amount.numberOfLines = 0
+                amount.text = "\(ingredient.amount ?? 0)"
+                
+                let unit = UILabel()
+                unit.numberOfLines = 0
+                unit.text = "\(ingredient.unit ?? "N/A")"
+                stackView.addArrangedSubview(label)
+                stackView.addArrangedSubview(amount)
+                stackView.addArrangedSubview(unit)
+            }
+        }
         
         if !recipe.analyzedInstructions.isEmpty{
             if !recipe.analyzedInstructions[0].steps.isEmpty{
@@ -34,15 +60,18 @@ class DiscoveryDetailViewController: UIViewController {
                     print(step.step)
                     let stepLabel = UILabel()
                     stepLabel.text = "\(step.number). \(step.step)"
-                    ingredientStackView.addArrangedSubview(stepLabel)
-                    stepLabel.translatesAutoresizingMaskIntoConstraints = false
-                    stepLabel.topAnchor.constraint(equalTo: ingredientStackView.topAnchor).isActive = true
-                    stepLabel.bottomAnchor.constraint(equalTo: ingredientStackView.bottomAnchor).isActive = true
-                    stepLabel.heightAnchor.constraint(equalToConstant: 200).isActive = true
-                    stepLabel.leftAnchor.constraint(equalTo: ingredientStackView.leftAnchor).isActive = true
-                    stepLabel.rightAnchor.constraint(equalTo: ingredientStackView.rightAnchor).isActive = true
+                    stepLabel.numberOfLines = 0
+                    stepStackView.addArrangedSubview(stepLabel)
                 }
             }
+        }
+        
+        if recipe.instructions != ""{
+            chefNoteStackView.isHidden = false
+            let label = UILabel()
+            label.numberOfLines = 0
+            label.text = recipe.instructions
+            chefNoteStackView.addArrangedSubview(label)
         }
     }
     
@@ -56,11 +85,11 @@ class DiscoveryDetailViewController: UIViewController {
         if !recipe.extendedIngredients.isEmpty{
             for i in recipe.extendedIngredients{
                 let ingredient = Ingredient(context: dataController.viewContext)
-                ingredient.amount = String(i.amount)
+//                ingredient.amount = String(i.amount)
                 ingredient.name = i.name
                 ingredient.unit = i.unit
                 ingredient.recipeId = cookingRecipe.id
-                dataController.saveContext()
+                ingredient.recipe = cookingRecipe
             }
         }
         
@@ -71,13 +100,14 @@ class DiscoveryDetailViewController: UIViewController {
                     step.recipeId = cookingRecipe.id
                     step.number = Int64(recipe.analyzedInstructions[0].steps[index].number)
                     step.stepDescription = recipe.analyzedInstructions[0].steps[index].step
-                    dataController.saveContext()
+                    step.recipe = cookingRecipe
                 }
             }
         }
 
         dataController.saveContext { (success, error) in
             if success{
+                self.saveButton.isEnabled = false
                 self.popupAlert(title: "Saved", message: "This recipe already saved to My Recipe")
             }
             else{

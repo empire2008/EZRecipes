@@ -59,6 +59,7 @@ class ChefNoteViewController: UIViewController {
             ingredientDataModel.unit = ingredient.unit
             ingredientDataModel.name = ingredient.name
             ingredientDataModel.recipeId = recipeDataModel.id
+            ingredientDataModel.recipe = recipeDataModel
         }
     }
     
@@ -68,6 +69,7 @@ class ChefNoteViewController: UIViewController {
             stepDataModel.stepDescription = steps[index].stepDescription
             stepDataModel.image = steps[index].image
             stepDataModel.number = Int64(index + 1)
+            stepDataModel.recipe = recipeDataModel
         }
     }
 }
