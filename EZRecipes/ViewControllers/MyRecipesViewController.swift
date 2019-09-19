@@ -23,6 +23,7 @@ class MyRecipesViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupFetchedResultsController()
+        tableView.reloadData()
     }
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)

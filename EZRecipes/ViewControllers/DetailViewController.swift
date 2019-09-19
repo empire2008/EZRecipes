@@ -26,8 +26,8 @@ class DetailViewController: UIViewController {
     
     // Local Data
     var localRecipe: CookingRecipe!
-    var localIngredient: [Ingredient] = []
-    var localCookingStep: [CookingStep] = []
+    var localIngredients: [Ingredient] = []
+    var localCookingSteps: [CookingStep] = []
     var localRecipeIndex: IndexPath!
     
     var dataController: DataController!
@@ -63,7 +63,19 @@ class DetailViewController: UIViewController {
             recipeImage.image = UIImage(named: "placeholder")
         }
         
+        if !localIngredients.isEmpty{
+            ingredientStackView.isHidden = false
+            for ingredient in localIngredients{
+                createIngredientPattern(name: ingredient.name!, amount: ingredient.amount ?? "-", unit: ingredient.unit ?? "N/A")
+            }
+        }
         
+        if !localCookingSteps.isEmpty{
+            stepStackView.isHidden = false
+            for step in localCookingSteps{
+                createStepPattern(number: "\(step.number)", step: step.stepDescription ?? "")
+            }
+        }
     }
     
     fileprivate func fetchIngredients() {
@@ -71,16 +83,17 @@ class DetailViewController: UIViewController {
         fetchRequest.predicate = NSPredicate(format: "recipe == %@", localRecipe)
         fetchRequest.sortDescriptors = []
         if let result = try? dataController.viewContext.fetch(fetchRequest){
-            localIngredient = result
+            localIngredients = result
         }
     }
     
     fileprivate func fetchCookingSteps() {
         let fetchRequest: NSFetchRequest<CookingStep> = CookingStep.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "recipe == %@", localRecipe)
-        fetchRequest.sortDescriptors = []
+        let sortDescriptor = NSSortDescriptor(key: "number", ascending: false)
+        fetchRequest.sortDescriptors = [sortDescriptor].reversed()
         if let result = try? dataController.viewContext.fetch(fetchRequest){
-            localCookingStep = result
+            localCookingSteps = result
         }
     }
     
@@ -94,25 +107,7 @@ class DetailViewController: UIViewController {
         if !recipe.extendedIngredients.isEmpty{
             ingredientStackView.isHidden = false
             for ingredient in recipe.extendedIngredients{
-                let stackView = UIStackView()
-                stackView.axis = .horizontal
-                stackView.distribution = .fillEqually
-                ingredientStackView.addArrangedSubview(stackView)
-                
-                let label = UILabel()
-                label.numberOfLines = 0
-                label.text = " - \(ingredient.name)"
-                
-                let amount = UILabel()
-                amount.numberOfLines = 0
-                amount.text = "\(ingredient.amount ?? 0)"
-                
-                let unit = UILabel()
-                unit.numberOfLines = 0
-                unit.text = "\(ingredient.unit ?? "N/A")"
-                stackView.addArrangedSubview(label)
-                stackView.addArrangedSubview(amount)
-                stackView.addArrangedSubview(unit)
+                createIngredientPattern(name: ingredient.name, amount: "\(ingredient.amount ?? 0)", unit: "\(ingredient.unit ?? "N/A")")
             }
         }
         
@@ -121,11 +116,7 @@ class DetailViewController: UIViewController {
             if !recipe.analyzedInstructions[0].steps.isEmpty{
                 stepStackView.isHidden = false
                 for step in recipe.analyzedInstructions[0].steps{
-                    print(step.step)
-                    let stepLabel = UILabel()
-                    stepLabel.text = "\(step.number). \(step.step)"
-                    stepLabel.numberOfLines = 0
-                    stepStackView.addArrangedSubview(stepLabel)
+                    createStepPattern(number: "\(step.number)", step: step.step)
                 }
             }
         }
@@ -138,6 +129,36 @@ class DetailViewController: UIViewController {
             label.text = recipe.instructions
             chefNoteStackView.addArrangedSubview(label)
         }
+    }
+    
+    func createStepPattern(number: String, step: String){
+        let stepLabel = UILabel()
+        stepLabel.text = "\(number). \(step)"
+        stepLabel.numberOfLines = 0
+        stepStackView.addArrangedSubview(stepLabel)
+    }
+    
+    func createIngredientPattern(name: String, amount: String, unit: String){
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.distribution = .fillEqually
+        ingredientStackView.addArrangedSubview(stackView)
+        
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.text = " - \(name)"
+        
+        let amountLabel = UILabel()
+        amountLabel.numberOfLines = 0
+        amountLabel.text = "\(amount)"
+        
+        let unitLabel = UILabel()
+        unitLabel.numberOfLines = 0
+        unitLabel.text = "\(unit)"
+        
+        stackView.addArrangedSubview(label)
+        stackView.addArrangedSubview(amountLabel)
+        stackView.addArrangedSubview(unitLabel)
     }
     
     // MARK: Set Toolbar for Local View
