@@ -80,7 +80,10 @@ extension MyRecipesViewController: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        let vc = storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
+        vc.localRecipe = fetchedResultsController.object(at: indexPath)
+        vc.dataController = dataController
+        present(vc, animated: true, completion: nil)
     }
 }
 

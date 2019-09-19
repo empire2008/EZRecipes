@@ -24,9 +24,8 @@
 		8D2545D923268E080048B7E9 /* EZRecipes.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8D2545D723268E080048B7E9 /* EZRecipes.xcdatamodeld */; };
 		8D2545DB23268E0C0048B7E9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D2545DA23268E0C0048B7E9 /* Assets.xcassets */; };
 		8D2545DE23268E0C0048B7E9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D2545DC23268E0C0048B7E9 /* LaunchScreen.storyboard */; };
-		8D30911C2333287A0095D265 /* MyRecipeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D30911B2333287A0095D265 /* MyRecipeDetailViewController.swift */; };
 		8D7A66AE23292D5800EA22CB /* AppClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7A66AD23292D5800EA22CB /* AppClient.swift */; };
-		8DCE747C232C913E008E33DA /* DiscoveryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCE747B232C913E008E33DA /* DiscoveryDetailViewController.swift */; };
+		8DCE747C232C913E008E33DA /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCE747B232C913E008E33DA /* DetailViewController.swift */; };
 		8DCE7493232CBC3E008E33DA /* MainCreateRecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCE7492232CBC3E008E33DA /* MainCreateRecipeViewController.swift */; };
 		8DD6C9F7232FE04700240322 /* StepCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD6C9F6232FE04700240322 /* StepCell.swift */; };
 		8DD6C9F9232FE05700240322 /* AddStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD6C9F8232FE05700240322 /* AddStepViewController.swift */; };
@@ -56,9 +55,8 @@
 		8D2545DA23268E0C0048B7E9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8D2545DD23268E0C0048B7E9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8D2545DF23268E0C0048B7E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8D30911B2333287A0095D265 /* MyRecipeDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecipeDetailViewController.swift; sourceTree = "<group>"; };
 		8D7A66AD23292D5800EA22CB /* AppClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppClient.swift; sourceTree = "<group>"; };
-		8DCE747B232C913E008E33DA /* DiscoveryDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveryDetailViewController.swift; sourceTree = "<group>"; };
+		8DCE747B232C913E008E33DA /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		8DCE7492232CBC3E008E33DA /* MainCreateRecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCreateRecipeViewController.swift; sourceTree = "<group>"; };
 		8DD6C9F6232FE04700240322 /* StepCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepCell.swift; sourceTree = "<group>"; };
 		8DD6C9F8232FE05700240322 /* AddStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddStepViewController.swift; sourceTree = "<group>"; };
@@ -165,9 +163,8 @@
 				8D0A4536232B67E900A6A50F /* MyRecipeCells */,
 				8D12C05323296486008EBF92 /* DiscoveryCells */,
 				8D12C05123296223008EBF92 /* DiscoveryViewController.swift */,
-				8DCE747B232C913E008E33DA /* DiscoveryDetailViewController.swift */,
 				8D0A4534232B640700A6A50F /* MyRecipesViewController.swift */,
-				8D30911B2333287A0095D265 /* MyRecipeDetailViewController.swift */,
+				8DCE747B232C913E008E33DA /* DetailViewController.swift */,
 				8DCE7492232CBC3E008E33DA /* MainCreateRecipeViewController.swift */,
 				8D1A0413232E8D9B00ADF5E1 /* AddIngredientViewController.swift */,
 				8DD6C9F8232FE05700240322 /* AddStepViewController.swift */,
@@ -357,12 +354,11 @@
 				8D0A4538232B680D00A6A50F /* MyRecipeCell.swift in Sources */,
 				8D1A0414232E8D9B00ADF5E1 /* AddIngredientViewController.swift in Sources */,
 				8D0A4535232B640700A6A50F /* MyRecipesViewController.swift in Sources */,
-				8D30911C2333287A0095D265 /* MyRecipeDetailViewController.swift in Sources */,
 				8D090928232B13EC00716E3A /* DataController.swift in Sources */,
 				8DF9AD0C2330D733004E1BF9 /* AlertController.swift in Sources */,
 				8DD6C9F9232FE05700240322 /* AddStepViewController.swift in Sources */,
 				8D7A66AE23292D5800EA22CB /* AppClient.swift in Sources */,
-				8DCE747C232C913E008E33DA /* DiscoveryDetailViewController.swift in Sources */,
+				8DCE747C232C913E008E33DA /* DetailViewController.swift in Sources */,
 				8DD6C9F7232FE04700240322 /* StepCell.swift in Sources */,
 				8D12C050232953E8008EBF92 /* RandomRecipesResponse.swift in Sources */,
 				8D2545D923268E080048B7E9 /* EZRecipes.xcdatamodeld in Sources */,

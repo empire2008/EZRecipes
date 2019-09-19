@@ -40,16 +40,16 @@ class DiscoveryViewController: UIViewController {
         }
         else{
             print("ERROR: \(error?.localizedDescription ?? "")")
+            DispatchQueue.main.async {
+                self.randomRecipes()
+            }
         }
     }
     
     @IBAction func refreshButton(_ sender: Any) {
         randomRecipes()
     }
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let vc = segue.destination as! DiscoveryDetailViewController
-        vc.recipe = sender as? Recipe
-    }
+    
 }
 
 extension DiscoveryViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
@@ -72,7 +72,10 @@ extension DiscoveryViewController: UICollectionViewDelegate, UICollectionViewDat
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "showDetail", sender: recipesData[indexPath.item])
+        let vc = storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
+        vc.recipe = recipesData[indexPath.row]
+        
+        present(vc, animated: true, completion: nil)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

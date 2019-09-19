@@ -1,5 +1,5 @@
 //
-//  DiscoveryDetailViewController.swift
+//  DetailViewController.swift
 //  EZRecipes
 //
 //  Created by SpaCE_MAC on 14/9/2562 BE.
@@ -8,8 +8,9 @@
 
 import UIKit
 import SDWebImage
+import CoreData
 
-class DiscoveryDetailViewController: UIViewController {
+class DetailViewController: UIViewController {
     
     @IBOutlet weak var recipeName: UILabel!
     @IBOutlet weak var recipeImage: UIImageView!
@@ -18,16 +19,78 @@ class DiscoveryDetailViewController: UIViewController {
     @IBOutlet weak var chefNoteStackView: UIStackView!
     @IBOutlet weak var ingredientStackView: UIStackView!
     @IBOutlet weak var stepStackView: UIStackView!
-    @IBOutlet weak var saveButton: UIBarButtonItem!
+    @IBOutlet weak var topToolBar: UIView!
     
+    // Discovery Data
     var recipe: Recipe!
+    
+    // Local Data
+    var localRecipe: CookingRecipe!
+    var localIngredient: [Ingredient] = []
+    var localCookingStep: [CookingStep] = []
+    var localRecipeIndex: IndexPath!
+    
     var dataController: DataController!
     var appDelegate = UIApplication.shared.delegate as! AppDelegate
+    var saveButton: UIButton!
+    var editButton: UIButton!
+    var deleteButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setHeader()
-        print(recipe.extendedIngredients)
+        if recipe != nil{
+            setDiscoveryToolbar()
+            loadDiscoveryData()
+        }
+        else{
+            fetchIngredients()
+            fetchCookingSteps()
+            loadLocalRecipe()
+        }
+    }
+    
+    // MARK: In case this view was called from local data
+    func loadLocalRecipe(){
+        recipeName.text = localRecipe.nameOfRecipe
+        
+        if let imageData = localRecipe.imageOfRecipe{
+            recipeImage.image = UIImage(data: imageData)
+        }
+        else if localRecipe.imageUrl != nil && localRecipe.imageUrl != ""{
+            recipeImage.sd_setImage(with: URL(string: localRecipe.imageUrl!), completed: nil)
+        }
+        else{
+            recipeImage.image = UIImage(named: "placeholder")
+        }
+        
+        
+    }
+    
+    fileprivate func fetchIngredients() {
+        let fetchRequest: NSFetchRequest<Ingredient> = Ingredient.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "recipe == %@", localRecipe)
+        fetchRequest.sortDescriptors = []
+        if let result = try? dataController.viewContext.fetch(fetchRequest){
+            localIngredient = result
+        }
+    }
+    
+    fileprivate func fetchCookingSteps() {
+        let fetchRequest: NSFetchRequest<CookingStep> = CookingStep.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "recipe == %@", localRecipe)
+        fetchRequest.sortDescriptors = []
+        if let result = try? dataController.viewContext.fetch(fetchRequest){
+            localCookingStep = result
+        }
+    }
+    
+    // MARK: In case this view was called from Discovery data
+    fileprivate func loadDiscoveryData() {
+        // header
+        recipeName.text = recipe.title
+        recipeImage.sd_setImage(with: URL(string: recipe.image), completed: nil)
+        
+        // add ingredient
         if !recipe.extendedIngredients.isEmpty{
             ingredientStackView.isHidden = false
             for ingredient in recipe.extendedIngredients{
@@ -53,6 +116,7 @@ class DiscoveryDetailViewController: UIViewController {
             }
         }
         
+        // add cooking step
         if !recipe.analyzedInstructions.isEmpty{
             if !recipe.analyzedInstructions[0].steps.isEmpty{
                 stepStackView.isHidden = false
@@ -66,6 +130,7 @@ class DiscoveryDetailViewController: UIViewController {
             }
         }
         
+        // chef note
         if recipe.instructions != ""{
             chefNoteStackView.isHidden = false
             let label = UILabel()
@@ -75,7 +140,26 @@ class DiscoveryDetailViewController: UIViewController {
         }
     }
     
-    @IBAction func saveToLocal(_ sender: Any) {
+    // MARK: Set Toolbar for Local View
+    func setLocalToolbar(){
+        
+    }
+    
+    // MARK: Set Toolbar for Discovery View
+    func setDiscoveryToolbar(){
+        saveButton = UIButton()
+        saveButton.setImage(UIImage(named: "download-1"), for: .normal)
+        saveButton.addTarget(self, action: #selector(saveAction), for: .touchUpInside)
+        self.topToolBar.addSubview(saveButton)
+        saveButton.translatesAutoresizingMaskIntoConstraints = false
+        saveButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        saveButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
+        saveButton.rightAnchor.constraint(equalTo: topToolBar.rightAnchor, constant: -12).isActive = true
+        saveButton.centerYAnchor.constraint(equalTo: topToolBar.centerYAnchor).isActive = true
+    }
+    
+    // MARK: Save data to local
+    @objc func saveAction(){
         dataController = appDelegate.dataController
         let cookingRecipe = CookingRecipe(context: dataController.viewContext)
         cookingRecipe.id = Date().timeStamp()
@@ -85,7 +169,7 @@ class DiscoveryDetailViewController: UIViewController {
         if !recipe.extendedIngredients.isEmpty{
             for i in recipe.extendedIngredients{
                 let ingredient = Ingredient(context: dataController.viewContext)
-//                ingredient.amount = String(i.amount)
+                //                ingredient.amount = String(i.amount)
                 ingredient.name = i.name
                 ingredient.unit = i.unit
                 ingredient.recipeId = cookingRecipe.id
@@ -104,7 +188,7 @@ class DiscoveryDetailViewController: UIViewController {
                 }
             }
         }
-
+        
         dataController.saveContext { (success, error) in
             if success{
                 self.saveButton.isEnabled = false
@@ -115,8 +199,8 @@ class DiscoveryDetailViewController: UIViewController {
             }
         }
     }
-    func setHeader(){
-        recipeName.text = recipe.title
-        recipeImage.sd_setImage(with: URL(string: recipe.image), completed: nil)
+    
+    @IBAction func closeButton(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
     }
 }
