@@ -22,7 +22,7 @@ class CreateStepViewController: UIViewController {
     func imagePicker(sourceType: UIImagePickerController.SourceType){
         let pickerController = UIImagePickerController()
         pickerController.delegate = self
-        pickerController.allowsEditing = true
+        pickerController.allowsEditing = false
         pickerController.sourceType = sourceType
         
         present(pickerController, animated: true, completion: nil)
@@ -62,7 +62,7 @@ class CreateStepViewController: UIViewController {
 
 extension CreateStepViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        let image = info[.editedImage] as? UIImage
+        let image = info[.originalImage] as? UIImage
         step.image = image?.pngData()
         stepPhoto.image = image
         dismiss(animated: true, completion: nil)
