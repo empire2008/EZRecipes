@@ -13,10 +13,10 @@ struct RandomRecipesResponse: Codable {
 }
 
 struct Recipe: Codable {
-    var id: Int = -1
+    var id: Int
     var title: String = ""
-    var image: String = ""
-    var imageType: String = ""
+    var image: String?
+//    var imageType: String = ""
 //    let readyInMinutes: Int
 //    let servings: Int
 //    let healthScore: Int
@@ -24,7 +24,7 @@ struct Recipe: Codable {
 //    let vegan: Bool
 //    let glutenFree: Bool
 //    let dairyFree: Bool
-    var instructions: String = ""
+    var instructions: String?
 //    let dishTypes: [String]
     var analyzedInstructions: [AnalyzedInstructions] = []
     var extendedIngredients: [IngredientDetail] = []
@@ -35,17 +35,29 @@ struct AnalyzedInstructions: Codable {
 }
 
 struct Step: Codable {
-    var number: Int = -1
-    var step: String = ""
+    var number: Int?
+    var step: String?
 }
 
 struct IngredientDetail: Codable {
-    let id: Double
+    let id: Double?
 //    let image: String
-    let name: String
+    let name: String?
 //    let original: String = ""
 //    let originalString: String = ""
 //    let originalName: String = ""
     let amount: Double?
     let unit: String?
 }
+
+//struct RandomRecipeErrorResponse: Codable {
+////    let status: String
+////    let code: Int
+//    let message: String
+//}
+//
+//extension RandomRecipeErrorResponse: LocalizedError{
+//    var errorDescription: String?{
+//        return message
+//    }
+//}

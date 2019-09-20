@@ -102,13 +102,13 @@ class DetailViewController: UIViewController {
     fileprivate func loadDiscoveryData() {
         // header
         recipeName.text = recipe.title
-        recipeImage.sd_setImage(with: URL(string: recipe.image), completed: nil)
+        recipeImage.sd_setImage(with: URL(string: recipe.image!), completed: nil)
         
         // add ingredient
         if !recipe.extendedIngredients.isEmpty{
             ingredientStackView.isHidden = false
             for ingredient in recipe.extendedIngredients{
-                createIngredientPattern(name: ingredient.name, amount: "\(ingredient.amount ?? 0)", unit: "\(ingredient.unit ?? "N/A")")
+                createIngredientPattern(name: ingredient.name ?? "", amount: "\(ingredient.amount ?? 0)", unit: "\(ingredient.unit ?? "N/A")")
             }
         }
         
@@ -117,7 +117,7 @@ class DetailViewController: UIViewController {
             if !recipe.analyzedInstructions[0].steps.isEmpty{
                 stepStackView.isHidden = false
                 for step in recipe.analyzedInstructions[0].steps{
-                    createStepPattern(number: "\(step.number)", step: step.step)
+                    createStepPattern(number: "\(step.number ?? 0)", step: step.step!)
                 }
             }
         }
@@ -215,7 +215,7 @@ class DetailViewController: UIViewController {
     @objc func saveAction(){
         dataController = appDelegate.dataController
         let cookingRecipe = CookingRecipe(context: dataController.viewContext)
-        cookingRecipe.id = Date().timeStamp()
+        cookingRecipe.id = Int64(recipe.id)
         cookingRecipe.imageUrl = recipe.image
         cookingRecipe.nameOfRecipe = recipe.title
         
@@ -235,7 +235,7 @@ class DetailViewController: UIViewController {
                 for index in 0..<recipe.analyzedInstructions[0].steps.count{
                     let step = CookingStep(context: dataController.viewContext)
                     step.recipeId = cookingRecipe.id
-                    step.number = Int64(recipe.analyzedInstructions[0].steps[index].number)
+                    step.number = Int64(recipe.analyzedInstructions[0].steps[index].number!)
                     step.stepDescription = recipe.analyzedInstructions[0].steps[index].step
                     step.recipe = cookingRecipe
                 }

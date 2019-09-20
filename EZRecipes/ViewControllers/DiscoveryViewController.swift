@@ -40,7 +40,7 @@ class DiscoveryViewController: UIViewController {
             }
         }
         else{
-            print("ERROR: \(error?.localizedDescription ?? "")")
+            print("ERROR: \(error)")
             DispatchQueue.main.async {
                 self.randomRecipes()
             }
@@ -63,8 +63,8 @@ extension DiscoveryViewController: UICollectionViewDelegate, UICollectionViewDat
         cell.foodName.text = recipesData[indexPath.item].title
         cell.loadingActivity.startAnimating()
 
-        if recipesData[indexPath.item].image != ""{
-            let url = URL(string: recipesData[indexPath.item].image)
+        if recipesData[indexPath.item].image != "" && recipesData[indexPath.item].image != nil{
+            let url = URL(string: recipesData[indexPath.item].image!)
             cell.imageProfile!.sd_setImage(with: url) { (image, error, sdCatch, url) in
                 cell.loadingActivity.stopAnimating()
             }
