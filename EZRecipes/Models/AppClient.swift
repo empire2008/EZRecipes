@@ -16,10 +16,12 @@ class AppClient{
     }
     enum EndPoint {
         case randomRecipes(Int)
+        case searchRecipe(String,Int)
 
         var stringValue: String{
             switch self {
             case .randomRecipes(let itemAmount): return AppClient.baseUrl + "random?apiKey=\(Auth.apiKey)&number=\(itemAmount)"
+            case .searchRecipe(let textSearch, let itemAmount): return AppClient.baseUrl + "search?apiKey=\(Auth.apiKey)&query=\(textSearch)&number=\(itemAmount)"
             }
         }
         
@@ -40,6 +42,24 @@ class AppClient{
             }
             catch{
                 complition(nil, error)
+            }
+        }
+        task.resume()
+    }
+    
+    class func requestSearchRecipeFromAPI(textSearch:String, itemAmount:Int, completion: @escaping (SearchRecipeResponse?, Error?) -> Void){
+        let task = URLSession.shared.dataTask(with: EndPoint.searchRecipe(textSearch, itemAmount).url) { data, response, error in
+            print(EndPoint.searchRecipe(textSearch, itemAmount).url)
+            guard let data = data else{
+                completion(nil, error)
+                return
+            }
+            do{
+                let responseObject = try JSONDecoder().decode(SearchRecipeResponse.self, from: data)
+                completion(responseObject, nil)
+            }
+            catch{
+                completion(nil, error)
             }
         }
         task.resume()

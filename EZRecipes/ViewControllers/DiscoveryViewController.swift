@@ -21,7 +21,8 @@ class DiscoveryViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        searchBar.delegate = self
+        hideKeyboardWhenTappedAround()
         randomRecipes()
     }
     
@@ -89,5 +90,24 @@ extension DiscoveryViewController: UICollectionViewDelegate, UICollectionViewDat
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 4
+    }
+}
+
+extension DiscoveryViewController: UISearchBarDelegate{
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        
+    }
+    
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        AppClient.requestSearchRecipeFromAPI(textSearch: searchBar.text!, itemAmount: 21, completion: handleSearchRecipe(searchResponse:error:))
+    }
+    func handleSearchRecipe(searchResponse: SearchRecipeResponse?, error:Error?){
+        if let searchResponse = searchResponse{
+            print("Data Search: \(searchResponse)")
+        }
+        else{
+            print("Error: \(error?.localizedDescription ?? "")")
+        }
     }
 }

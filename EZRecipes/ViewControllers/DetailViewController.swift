@@ -116,7 +116,7 @@ class DetailViewController: UIViewController {
         if !recipe.analyzedInstructions.isEmpty{
             if !recipe.analyzedInstructions[0].steps.isEmpty{
                 stepStackView.isHidden = false
-                for step in recipe.analyzedInstructions[0].steps.reversed(){
+                for step in recipe.analyzedInstructions[0].steps{
                     createStepPattern(number: "\(step.number)", step: step.step)
                 }
             }
