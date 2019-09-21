@@ -18,6 +18,7 @@ class DiscoveryViewController: UIViewController {
     
     let itemPerRandom = 51
     var recipesData: [Recipe] = []
+    var reconnectCount = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +32,24 @@ class DiscoveryViewController: UIViewController {
         AppClient.requestRandomRecipes(itemAmount: itemPerRandom, complition: handleRandomRecipes(recipeResponse:error:))
     }
     
+    func getSearchRecipes(searchText: String){
+        loadingActivityView.startAnimating()
+        AppClient.requestSearchRecipeFromAPI(textSearch: searchText, itemAmount: 21, completion: handleSearchRecipe(searchResponse:error:))
+    }
+    
+    func handleSearchRecipe(searchResponse: SearchRecipeResponse?, error:Error?){
+        if let searchResponse = searchResponse{
+            DispatchQueue.main.async {
+                self.recipesData = searchResponse.results
+                self.loadingActivityView.stopAnimating()
+                self.collectionView.reloadData()
+            }
+        }
+        else{
+            print("Error: \(error)")
+        }
+    }
+    
     func handleRandomRecipes(recipeResponse: RandomRecipesResponse?, error: Error?){
         if let recipeResponse = recipeResponse{
             DispatchQueue.main.async {
@@ -41,8 +60,16 @@ class DiscoveryViewController: UIViewController {
         }
         else{
             print("ERROR: \(error)")
-            DispatchQueue.main.async {
-                self.randomRecipes()
+            reconnectCount += 1
+            if reconnectCount <= 3{
+                DispatchQueue.main.async {
+                    self.randomRecipes()
+                }
+            }
+            else{
+                reconnectCount = 0
+                self.loadingActivityView.stopAnimating()
+                self.popupAlert(title: "Connection Failed", message: "Please try again later")
             }
         }
     }
@@ -94,20 +121,9 @@ extension DiscoveryViewController: UICollectionViewDelegate, UICollectionViewDat
 }
 
 extension DiscoveryViewController: UISearchBarDelegate{
-    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        
-    }
-    
-    
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        AppClient.requestSearchRecipeFromAPI(textSearch: searchBar.text!, itemAmount: 21, completion: handleSearchRecipe(searchResponse:error:))
+        searchBar.resignFirstResponder()
+        getSearchRecipes(searchText: searchBar.text!)
     }
-    func handleSearchRecipe(searchResponse: SearchRecipeResponse?, error:Error?){
-        if let searchResponse = searchResponse{
-            print("Data Search: \(searchResponse)")
-        }
-        else{
-            print("Error: \(error?.localizedDescription ?? "")")
-        }
-    }
+    
 }

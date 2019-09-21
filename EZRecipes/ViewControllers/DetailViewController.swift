@@ -123,13 +123,13 @@ class DetailViewController: UIViewController {
         }
         
         // chef note
-        if recipe.instructions != ""{
-            chefNoteStackView.isHidden = false
-            let label = UILabel()
-            label.numberOfLines = 0
-            label.text = recipe.instructions
-            chefNoteStackView.addArrangedSubview(label)
-        }
+//        if recipe.instructions != ""{
+//            chefNoteStackView.isHidden = false
+//            let label = UILabel()
+//            label.numberOfLines = 0
+//            label.text = recipe.instructions
+//            chefNoteStackView.addArrangedSubview(label)
+//        }
     }
     
     func createStepPattern(number: String, step: String, imageData: Data? = nil){
@@ -170,6 +170,13 @@ class DetailViewController: UIViewController {
         stackView.addArrangedSubview(label)
         stackView.addArrangedSubview(amountLabel)
         stackView.addArrangedSubview(unitLabel)
+        
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.widthAnchor.constraint(equalTo: ingredientStackView.widthAnchor, multiplier: 0.5).isActive = true
+        amountLabel.translatesAutoresizingMaskIntoConstraints = false
+        amountLabel.widthAnchor.constraint(equalTo: ingredientStackView.widthAnchor, multiplier: 0.2).isActive = true
+        unitLabel.translatesAutoresizingMaskIntoConstraints = false
+        unitLabel.widthAnchor.constraint(equalTo: ingredientStackView.widthAnchor, multiplier: 0.3).isActive = true
     }
     
     // MARK: Set Toolbar for Local View

@@ -12,7 +12,9 @@ class AppClient{
     
     static let baseUrl = "https://api.spoonacular.com/recipes/"
     struct Auth {
-        static let apiKey = "19e856f28a174650951620c9d9a47a57"
+//        static let apiKey = "19e856f28a174650951620c9d9a47a57"
+        static let apiKey = "b9135d68f0844127961c2fa705debfac"
+        
     }
     enum EndPoint {
         case randomRecipes(Int)
@@ -32,6 +34,7 @@ class AppClient{
     
     class func requestRandomRecipes(itemAmount: Int, complition: @escaping (RandomRecipesResponse?, Error?) -> Void){
         let task = URLSession.shared.dataTask(with: EndPoint.randomRecipes(itemAmount).url) { data, response, error in
+            print(EndPoint.randomRecipes(itemAmount).url)
             guard let data = data else{
                 complition(nil, error)
                 return
@@ -48,7 +51,8 @@ class AppClient{
     }
     
     class func requestSearchRecipeFromAPI(textSearch:String, itemAmount:Int, completion: @escaping (SearchRecipeResponse?, Error?) -> Void){
-        let task = URLSession.shared.dataTask(with: EndPoint.searchRecipe(textSearch, itemAmount).url) { data, response, error in
+        print(EndPoint.searchRecipe(textSearch, itemAmount).url)
+        let task = URLSession.shared.dataTask(with: EndPoint.searchRecipe(textSearch, 1).url) { data, response, error in
             print(EndPoint.searchRecipe(textSearch, itemAmount).url)
             guard let data = data else{
                 completion(nil, error)
